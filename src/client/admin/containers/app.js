@@ -1,12 +1,13 @@
 import React from 'react'
-import {test} from "./pages"
+import {main, dongk} from "./pages"
 import { Switch, Route } from 'react-router-dom'
 
 class App extends React.Component {
     render(){
         return(
             <Switch>
-                <Route exact path="/" component={test} />
+                <Route exact path="/" component={main} />
+                <Route exact path="/dongk" component={dongk}/>
             </Switch>
         )
     }

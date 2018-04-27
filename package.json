@@ -2,11 +2,13 @@
   "name": "electron-test-server",
   "version": "1.0.0",
   "description": "",
-  "main": "build/index.js",
+  "main": "./build/index.js",
   "scripts": {
     "start": "npm run babel && PLATFORM=mac64 webpack && electron .",
     "babel": "babel src/ --out-dir build/ --source-maps",
-    "build:osx": "npm run babel && PLATFORM=mac64 webpack && build --mac"
+    "build":"npm run build:win64 && npm run build:osx",
+    "build:osx": "npm run babel && NODE_ENV=production PLATFORM=mac64 webpack && build --mac",
+    "build:win64": "NODE_ENV=production PLATFORM=win64 webpack && build --win --x64"
   },
   "babel": {
     "plugins": [
@@ -59,8 +61,7 @@
     "skip-loader": "^1.0.0",
     "uglify-js": "github:mishoo/UglifyJS2#b7bb706",
     "webpack": "^1.13.2",
-    "redux-logger": "^3.0.6",
-    "pug": "^2.0.0-rc.4"
+    "redux-logger": "^3.0.6"
   },
   "dependencies": {
     "express": "^4.16.3",
@@ -76,7 +77,8 @@
     "react-router-redux": "^5.0.0-alpha.8",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "vision": "^4.1.1"
+    "vision": "^4.1.1",
+    "pug": "^2.0.0-rc.4"
   },
   "build": {
     "productName": "ElectronTestServer",
@@ -116,8 +118,11 @@
       "app": "."
     },
     "files": [
-      "public",
-      "!src"
+      "build/",
+      "public/",
+      "templates/",
+      "!src/",
+      "!dist/"
     ]
   },
   "homepage": "https://github.com/skehd13/electron-test-server#readme"

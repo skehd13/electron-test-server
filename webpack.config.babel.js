@@ -28,9 +28,9 @@ const COMMON_PLUGINS = [
     LIN_BUILD,
     X64_BUILD,
   }),
-    new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify('development')
-    }),
+  new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+  }),
   new ExtractTextPlugin("index.css"),
 ];
 const PLUGINS = DEBUG ? COMMON_PLUGINS : COMMON_PLUGINS.concat([
@@ -60,7 +60,9 @@ export default {
     {"pretty-error": "Error"},
   ],
   entry: {
-    "app.min":["./src/client/index.js", 'isomorphic-fetch']
+      "supervisor.min":["./src/client/supervisor/index.js", 'isomorphic-fetch'],
+      "display.min":["./src/client/display/index.js", 'isomorphic-fetch'],
+      "admin.min":["./src/client/admin/index.js", 'isomorphic-fetch']
   },
   output: {
     path: path.join(__dirname, "public/js"),
@@ -85,4 +87,4 @@ export default {
     name: "[name].[ext]",
   },
   plugins: PLUGINS,
-};
+}
